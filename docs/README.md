@@ -26,6 +26,12 @@
 - 상세 화면: `03_ux/screen_specifications.md`
 - 와이어프레임: `03_ux/wireframes.md`
 - 요구사항 추적: `08_testing/requirements_traceability.md`
+- 엔터티 관계: `06_data_api/data_model.md`
+- SQLite 스키마: `06_data_api/database_schema.md`
+- API 엔드포인트: `06_data_api/api_specification.md`
+- 요청·응답 예시: `06_data_api/request_response_schemas.md`
+- API 오류: `06_data_api/error_contract.md`
+- 기능·API 연결: `06_data_api/api_traceability.md`
 
 ## 권장 작성 순서
 
