@@ -35,6 +35,7 @@
 - 기능·API 연결: `06_data_api/api_traceability.md`
 - AI 에이전트 활용 보고서: `12_reports/ai_agent_usage_report.md`
 - 서비스 사용방법: `12_reports/service_usage_guide.md`
+- 다른 컴퓨터 실행 준비: `12_reports/other_pc_setup_guide.md`
 
 ## 권장 작성 순서
 
