@@ -16,6 +16,7 @@
 | `09_development` | 구현 순서와 작업 지시 관리 | `implementation_plan.md` |
 | `10_operations` | 배포, 모니터링, 장애 대응 정의 | `deployment_guide.md` |
 | `11_templates` | 서비스가 생성할 결과물 형식 정의 | `brand_report_template.md` |
+| `12_reports` | AI 에이전트 활용 보고서와 서비스 사용방법 | `ai_agent_usage_report.md` |
 
 ## 현재 핵심 기준 문서
 
@@ -32,6 +33,8 @@
 - 요청·응답 예시: `06_data_api/request_response_schemas.md`
 - API 오류: `06_data_api/error_contract.md`
 - 기능·API 연결: `06_data_api/api_traceability.md`
+- AI 에이전트 활용 보고서: `12_reports/ai_agent_usage_report.md`
+- 서비스 사용방법: `12_reports/service_usage_guide.md`
 
 ## 권장 작성 순서
 
@@ -51,6 +54,7 @@
 -> 4주 캠페인 전략
 -> Instagram 게시물 8개
 -> 포스터 브리프
+-> 광고 포스터
 -> 저장·비교
 -> 캘린더 CSV 내보내기
 ```
