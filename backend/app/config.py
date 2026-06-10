@@ -13,6 +13,7 @@ class Settings:
     app_name: str = "AI Small Business Content Studio API"
     app_version: str = "0.1.0"
     database_path: Path = PROJECT_ROOT / "data" / "app.db"
+    generated_image_path: Path = PROJECT_ROOT / "data" / "generated_images"
     ai_provider: str = "mock"
 
     @classmethod
@@ -25,6 +26,11 @@ class Settings:
         )
         return cls(
             database_path=database_path,
+            generated_image_path=Path(
+                os.getenv(
+                    "GENERATED_IMAGE_PATH",
+                    str(database_path.parent / "generated_images"),
+                )
+            ).resolve(),
             ai_provider=os.getenv("TEXT_AI_PROVIDER", "mock"),
         )
-

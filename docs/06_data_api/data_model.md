@@ -15,6 +15,7 @@ Campaign 1 ── N CampaignStrategy
 Campaign 1 ── N Content
 Content 1 ── N ContentVariant
 Content 1 ── 0..1 PosterBrief
+PosterBrief 1 ── N GeneratedImage
 Campaign 1 ── N CalendarItem
 Content 1 ── 0..N CalendarItem
 
@@ -34,6 +35,7 @@ ComparisonSet N ── M ContentVariant
 | Content | 게시물 슬롯, 주차, 주제, 상태 |
 | ContentVariant | AI 원본 또는 사용자 수정 문구 |
 | PosterBrief | 게시물용 이미지 및 포스터 제작 지시 |
+| GeneratedImage | 생성 배경과 한글 합성 포스터의 버전·승인·파일 참조 |
 | CalendarItem | 게시 예정일과 연결 콘텐츠 |
 | GenerationRun | AI 요청의 실행 상태와 추적 메타데이터 |
 | ComparisonSet | 사용자가 비교하기 위해 선택한 콘텐츠 변형 묶음 |
@@ -54,10 +56,10 @@ ComparisonSet N ── M ContentVariant
 | Brand | 모든 하위 데이터 | `ON DELETE CASCADE` |
 | Campaign | 전략, 콘텐츠, 캘린더 | `ON DELETE CASCADE` |
 | Content | 변형, 포스터, 캘린더 연결 | 변형·포스터 삭제, 캘린더는 함께 삭제 |
+| PosterBrief | 생성 이미지 | `ON DELETE CASCADE` |
 | GenerationRun | 생성 결과 | 실행 기록 삭제를 기본 제공하지 않음 |
 
 ## 동시성
 
 MVP는 단일 사용자이므로 복잡한 잠금은 사용하지 않는다. 수정 API는
 `updated_at`을 반환하고, 후속 다중 사용자 버전에서 낙관적 잠금을 추가한다.
-

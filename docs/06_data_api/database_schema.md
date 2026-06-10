@@ -164,6 +164,30 @@ AI origin 변형은 콘텐츠당 최대 3개다. 사용자 편집본은 이 제�
 | `created_at` | TEXT | NOT NULL |
 | `updated_at` | TEXT | NOT NULL |
 
+## `generated_images`
+
+| 열 | 타입 | 제약 |
+|---|---|---|
+| `id` | TEXT | PK |
+| `poster_brief_id` | TEXT | NOT NULL, FK, CASCADE |
+| `version` | INTEGER | NOT NULL, 1 이상 |
+| `status` | TEXT | NOT NULL, `draft`, `approved`, `superseded` |
+| `provider` | TEXT | NOT NULL |
+| `model` | TEXT | NOT NULL |
+| `prompt` | TEXT | NOT NULL |
+| `aspect_ratio` | TEXT | NOT NULL |
+| `width` | INTEGER | NOT NULL |
+| `height` | INTEGER | NOT NULL |
+| `background_path` | TEXT | NOT NULL |
+| `composed_path` | TEXT | NOT NULL |
+| `generation_run_id` | TEXT | NULL, FK |
+| `approved_at` | TEXT | NULL |
+| `created_at` | TEXT | NOT NULL |
+
+고유 제약: `(poster_brief_id, version)`. 한 브리프의 현재 `approved` 이미지는
+애플리케이션 규칙상 하나만 유지한다. DB에는 파일 자체나 API 키가 아닌 생성 파일의
+상대 경로만 저장한다.
+
 ## `calendar_items`
 
 | 열 | 타입 | 제약 |
@@ -216,5 +240,6 @@ AI origin 변형은 콘텐츠당 최대 3개다. 사용자 편집본은 이 제�
 - `campaigns(brand_id, created_at DESC)`
 - `contents(campaign_id, sequence)`
 - `content_variants(content_id, created_at DESC)`
+- `generated_images(poster_brief_id, version DESC)`
 - `calendar_items(campaign_id, scheduled_date)`
 - `generation_runs(status, started_at DESC)`

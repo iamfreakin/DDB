@@ -11,7 +11,7 @@
 - 리소스 생성 성공은 `201 Created`를 반환한다.
 - 조회 성공은 `200 OK`, 내용 없는 삭제는 `204 No Content`를 반환한다.
 - AI 생성 요청은 MVP에서 동기식으로 처리한다.
-- 생성 요청의 서버 제한 시간은 기본 60초다.
+- 생성 요청의 공급자 제한 시간은 기본 180초다.
 - 오류는 `error_contract.md`의 공통 형식을 사용한다.
 - 목록 API는 `limit`, `offset` 페이지네이션을 사용한다.
 - 응답의 계산 필드는 데이터베이스에 저장하지 않을 수 있다.
@@ -86,9 +86,13 @@ AI origin 변형은 게시물당 3개를 초과할 수 없다. 사용자 수정�
 | POST | `/contents/{content_id}/poster-brief` | 포스터 브리프 생성 | 201 |
 | GET | `/contents/{content_id}/poster-brief` | 브리프 조회 | 200 |
 | PATCH | `/contents/{content_id}/poster-brief` | 브리프 수정 | 200 |
+| POST | `/poster-briefs/{id}/images` | 실제 포스터 생성 | 201 |
+| GET | `/poster-briefs/{id}/images` | 포스터 생성 이력 조회 | 200 |
+| POST | `/generated-images/{id}/approve` | 포스터 승인 | 200 |
+| GET | `/generated-images/{id}/file` | 합성본 또는 배경 PNG 조회·다운로드 | 200 |
 
-후속 버전에서 `POST /poster-briefs/{id}/images`를 추가해 실제 이미지 생성 API를
-연결한다.
+이미지 생성 요청은 `confirm_cost=true`를 요구한다. `variant=background`를 지정하면
+텍스트 합성 전 배경을 조회하며, `download=true`는 첨부 파일 응답을 반환한다.
 
 ## 캘린더
 
@@ -96,9 +100,11 @@ AI origin 변형은 게시물당 3개를 초과할 수 없다. 사용자 수정�
 |---|---|---|---|
 | POST | `/campaigns/{campaign_id}/calendar` | 4주 캘린더 생성 | 201 |
 | GET | `/campaigns/{campaign_id}/calendar` | 캘린더 조회 | 200 |
+| POST | `/campaigns/{campaign_id}/calendar:refresh` | 콘텐츠 상태와 승인 포스터 최신화 | 200 |
 | PATCH | `/calendar-items/{item_id}` | 게시일 또는 상태 수정 | 200 |
 
-게시일은 캠페인 기간 밖으로 이동할 수 없다.
+게시일은 캠페인 기간 밖으로 이동할 수 없다. 조회와 최신화 응답은 연결된 콘텐츠,
+선택 문구, 승인된 포스터 이미지 요약을 함께 반환한다.
 
 ## 결과 비교
 
@@ -115,7 +121,8 @@ AI origin 변형은 게시물당 3개를 초과할 수 없다. 사용자 수정�
 | GET | `/analyses/{analysis_id}/export.md` | `text/markdown; charset=utf-8` |
 | GET | `/campaigns/{campaign_id}/calendar/export.csv` | `text/csv; charset=utf-8` |
 
-다운로드 파일명은 안전하게 정규화한 가게명과 생성일을 포함한다.
+캘린더 CSV에는 날짜, 채널, 유형, 주제, 선택 문구, 핵심 메시지, 상태, 승인 포스터
+여부를 포함한다. 다운로드 파일명은 안전하게 정규화한 가게명과 생성일을 포함한다.
 
 ## 필터와 페이지네이션
 

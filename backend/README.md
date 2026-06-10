@@ -24,4 +24,30 @@
 - 브랜드 프로필 버전 생성
 - Mock AI 브랜드 분석 생성
 - 브랜드 분석 수정 및 승인
+- 캠페인 생성
+- 4주 전략 생성
+- Instagram 게시물 8개 생성
+- 게시물 변형 생성, 선택, 사용자 수정본 저장
+- 포스터 브리프 생성 및 수정
+- Mock 또는 OpenAI 이미지 배경 생성
+- 정확한 한글 문구 합성, PNG 미리보기·다운로드·승인
+- 콘텐츠 캘린더 생성
+- 비교 세트 생성
+- 브랜드 보고서 Markdown 및 캘린더 CSV 내보내기
 - 공통 오류 응답
+
+## OpenAI 연동
+
+생성 요청에 `X-OpenAI-API-Key` 헤더가 있으면 OpenAI Responses API를 사용한다.
+헤더가 없으면 Mock Provider를 사용한다.
+
+선택 헤더:
+
+```text
+X-OpenAI-Model: gpt-5-mini
+X-OpenAI-Image-Model: gpt-image-2
+```
+
+API 키는 요청 처리 중 메모리에만 존재하고 DB에 저장하지 않는다.
+이미지 생성 결과는 기본적으로 `data/generated_images`에 저장하며 DB에는 상대
+파일 경로만 기록한다. API 키가 없으면 로컬 Mock 포스터를 생성한다.

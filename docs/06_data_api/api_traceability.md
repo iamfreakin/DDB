@@ -13,7 +13,7 @@
 | FR-106 | `POST /campaigns/{id}/contents:generate` | `contents`, `content_variants` |
 | FR-107 | `POST /contents/{id}/variants` | `content_variants`, `generation_runs` |
 | FR-108 | `POST /contents/{id}/poster-brief` | `poster_briefs`, `generation_runs` |
-| FR-109 | `POST /campaigns/{id}/calendar` | `calendar_items` |
+| FR-109 | `POST /campaigns/{id}/calendar`, `GET /campaigns/{id}/calendar`, `POST /campaigns/{id}/calendar:refresh` | `calendar_items`, `contents`, `generated_images` |
 | FR-110 | `POST /variants/{id}/edits` | `content_variants` |
 | FR-111 | `GET /contents`, `GET /contents/{id}` | 콘텐츠 관련 테이블 |
 | FR-112 | `POST /comparison-sets`, `GET /comparison-sets/{id}` | 비교 관련 테이블 |
@@ -21,5 +21,4 @@
 | FR-114 | `GET /campaigns/{id}/calendar/export.csv` | `calendar_items` |
 | FR-115 | 모든 AI 생성 API | `generation_runs` |
 | FR-116 | 프로필 생성 및 모든 조회 응답 | 버전 참조와 `is_stale` 계산 |
-| FR-117 | 후속 `/poster-briefs/{id}/images` | 후속 이미지 테이블 |
-
+| FR-117 | `POST/GET /poster-briefs/{id}/images`, `POST /generated-images/{id}/approve`, `GET /generated-images/{id}/file` | `generated_images`, `generation_runs` |
